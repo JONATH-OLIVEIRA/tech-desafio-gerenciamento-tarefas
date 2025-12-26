@@ -1,85 +1,109 @@
-# 🚀 Sistema de Gerenciamento de Tarefas - Tech Challenge
+# Sistema de Gerenciamento de Tarefas - Tech Challenge
 
 API REST para gerenciamento de tarefas desenvolvida como parte do desafio técnico para Desenvolvedor Java.
 
+---
+
 ## 📋 Funcionalidades Implementadas
 
-### ✅ CRUD Completo de Tarefas
-- **POST** `/tarefas` - Criar nova tarefa
-- **GET** `/tarefas` - Listar tarefas com filtros
-- **GET** `/tarefas/{id}` - Buscar tarefa por ID
-- **PUT** `/tarefas/{id}/iniciar` - Iniciar tarefa
-- **PUT** `/tarefas/{id}/concluir` - Concluir tarefa
-- **DELETE** `/tarefas/{id}` - Excluir tarefa
+✅ **CRUD Completo de Tarefas**
 
-### ✅ Filtros Avançados
-- **Status**: `PENDENTE`, `EM_ANDAMENTO`, `CONCLUIDA`
-- **Prioridade**: `BAIXA`, `MEDIA`, `ALTA`
-- **Data de criação**: Intervalo personalizado
-- **Ordenação**: Por `dataCriacao` (padrão) ou `prioridade`
+* `POST /tarefas` - Criar nova tarefa
+* `GET /tarefas` - Listar tarefas com filtros
+* `GET /tarefas/{id}` - Buscar tarefa por ID
+* `PUT /tarefas/{id}/iniciar` - Iniciar tarefa
+* `PUT /tarefas/{id}/concluir` - Concluir tarefa
+* `DELETE /tarefas/{id}` - Excluir tarefa
 
-### ✅ Regras de Negócio
-- Tarefas criadas iniciam automaticamente como `PENDENTE`
-- `dataCriacao` gerada automaticamente no servidor
-- Prioridade é campo obrigatório na criação
-- Apenas tarefas `PENDENTES` podem ser iniciadas
-- Tarefas concluídas registram `dataConclusao` automaticamente
-- Validações de estado (não iniciar já iniciada, não concluir já concluída)
+✅ **Filtros Avançados**
+
+* Status: `PENDENTE`, `EM_ANDAMENTO`, `CONCLUIDA`
+* Prioridade: `BAIXA`, `MEDIA`, `ALTA`
+* Data de criação: Intervalo personalizado
+* Ordenação: Por `dataCriacao` (padrão) ou `prioridade`
+
+✅ **Regras de Negócio**
+
+* Tarefas criadas iniciam automaticamente como `PENDENTE`
+* `dataCriacao` gerada automaticamente no servidor
+* Prioridade é campo obrigatório na criação
+* Apenas tarefas `PENDENTES` podem ser iniciadas
+* Tarefas concluídas registram `dataConclusao` automaticamente
+* Validações de estado (não iniciar já iniciada, não concluir já concluída)
+
+---
 
 ## 🏗️ Arquitetura Técnica
-src/main/java/com/techtest/gerenciador_tarefas/
-├── config/ # Configurações (Swagger)
-├── controller/ # Controladores REST (@RestController)
-├── service/ # Lógica de negócio (@Service)
-├── repository/ # Persistência (JpaRepository)
-├── model/ # Entidades JPA (@Entity)
-├── DTO/ # Objetos de Transferência de Dados
-├── mapper/ # Conversores DTO ↔ Entity
-├── specification/ # Filtros dinâmicos (Specification)
-└── globalExceptionHandler/ # Tratamento de erros padronizado
 
+```
+src/main/java/com/techtest/gerenciador_tarefas/
+├── config/                   # Configurações (Swagger)
+├── controller/               # Controladores REST (@RestController)
+├── service/                  # Lógica de negócio (@Service)
+├── repository/               # Persistência (JpaRepository)
+├── model/                    # Entidades JPA (@Entity)
+├── DTO/                      # Objetos de Transferência de Dados
+├── mapper/                   # Conversores DTO ↔ Entity
+├── specification/            # Filtros dinâmicos (Specification)
+└── globalExceptionHandler/   # Tratamento de erros padronizado
+```
+
+---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Java 17**
-- **Spring Boot 3.x**
-- **Spring Data JPA**
-- **H2 Database** (em memória)
-- **SpringDoc OpenAPI 3** (Swagger UI)
-- **Maven** (Gerenciamento de dependências)
-- **JUnit 5** (Testes unitários)
+* Java 17
+* Spring Boot 3.x
+* Spring Data JPA
+* H2 Database (em memória)
+* SpringDoc OpenAPI 3 (Swagger UI)
+* Maven (Gerenciamento de dependências)
+* JUnit 5 (Testes unitários)
+
+---
 
 ## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
-- Java 17 ou superior
-- Maven 3.6+
-- Git (opcional)
+
+* Java 17 ou superior
+* Maven 3.6+
+* Git (opcional)
 
 ### Passo 1: Clone o repositório
+
+```bash
 git clone https://github.com/JONATH-OLIVEIRA/tech-desafio-gerenciamento-tarefas.git
 cd tech-desafio-gerenciamento-tarefas
+```
 
+### Passo 2: Execute a aplicação
 
-### Passo 2: Execute a aplicacao
-# Opção 1: Usando Maven
+**Opção 1: Usando Maven**
+
+```bash
 mvn spring-boot:run
+```
 
-# Opção 2: Executando o JAR
+**Opção 2: Executando o JAR**
+
+```bash
 mvn clean package
 java -jar target/gerenciador_tarefas-0.0.1-SNAPSHOT.jar
+```
 
 ### Passo 3: Acesse os endpoints
-A aplicação estará disponível em: http://localhost:8080
 
-### Documentação da API
-Swagger UI 
-Acesse: http://localhost:8080/swagger-ui.html
+A aplicação estará disponível em: `http://localhost:8080`
+Documentação da API (Swagger UI): `http://localhost:8080/swagger-ui.html`
 
-### Endpoints Disponíveis
+---
 
-1. Criar Tarefa
-http
+## Endpoints Disponíveis
+
+**Criar Tarefa**
+
+```http
 POST /tarefas
 Content-Type: application/json
 
@@ -88,174 +112,166 @@ Content-Type: application/json
   "descricao": "Revisar conceitos de Spring Data JPA",
   "prioridade": "ALTA"
 }
+```
 
-2. Listar Tarefas (com filtros)
-http
+**Listar Tarefas (com filtros)**
+
+```http
 GET /tarefas?status=PENDENTE&prioridade=ALTA&dataInicio=01/01/2024&dataFim=31/12/2024&ordenarPor=prioridade
+```
+
 Parâmetros de consulta:
 
-status (opcional): PENDENTE, EM_ANDAMENTO, CONCLUIDA
+* `status` (opcional): `PENDENTE`, `EM_ANDAMENTO`, `CONCLUIDA`
+* `prioridade` (opcional): `BAIXA`, `MEDIA`, `ALTA`
+* `dataInicio` e `dataFim` (opcional): Formato `dd/MM/yyyy`
+* `ordenarPor` (opcional): `dataCriacao` (padrão) ou `prioridade`
 
-prioridade (opcional): BAIXA, MEDIA, ALTA
+**Iniciar Tarefa**
 
-dataInicio (opcional): Formato dd/MM/yyyy
-
-dataFim (opcional): Formato dd/MM/yyyy
-
-ordenarPor (opcional): dataCriacao (padrão) ou prioridade
-
-3. Iniciar Tarefa
-http
+```http
 PUT /tarefas/{id}/iniciar
+```
 
-4. Concluir Tarefa
-http
+**Concluir Tarefa**
+
+```http
 PUT /tarefas/{id}/concluir
+```
 
-6. Buscar Tarefa por ID
-http
+**Buscar Tarefa por ID**
+
+```http
 GET /tarefas/{id}
+```
 
-7. Excluir Tarefa
-http
+**Excluir Tarefa**
 
+```http
 DELETE /tarefas/{id}
+```
 
-### Banco de Dados
-# ===============================
-# H2 DATABASE
-# ===============================
+---
+
+## Banco de Dados
+
+### H2 DATABASE
+
+```properties
 spring.datasource.url=jdbc:h2:mem:gerenciador-tarefas
 spring.datasource.driver-class-name=org.h2.Driver
 spring.datasource.username=sa
 spring.datasource.password=
-
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+```
 
-# ===============================
-# H2 CONSOLE
-# ===============================
+### H2 CONSOLE
+
+```properties
 spring.h2.console.enabled=true
 spring.h2.console.path=/h2-console
+```
 
-sql
+### SQL de exemplo
+
+```sql
 CREATE TABLE tarefas (
-    id UUID PRIMARY KEY,
-    titulo VARCHAR(255) NOT NULL,
-    descricao VARCHAR(500),
-    status VARCHAR(20) NOT NULL,
-    prioridade VARCHAR(20) NOT NULL,
-    data_criacao TIMESTAMP NOT NULL,
-    data_conclusao TIMESTAMP
+  id UUID PRIMARY KEY,
+  titulo VARCHAR(255) NOT NULL,
+  descricao VARCHAR(500),
+  status VARCHAR(20) NOT NULL,
+  prioridade VARCHAR(20) NOT NULL,
+  data_criacao TIMESTAMP NOT NULL,
+  data_conclusao TIMESTAMP
 );
-### TESTES
+```
+
+---
+
+## Testes
+
+```bash
 mvn test
+```
 
-### Decisões Técnicas
+---
 
-### 1. Spring Data JPA Specifications
-Optei por usar Specifications para os filtros dinâmicos em vez de Query Methods, pois:
+## Decisões Técnicas
 
-Oferece maior flexibilidade para combinações de filtros
+1. **Spring Data JPA Specifications**
 
-Mantém o código mais organizado e extensível
+   * Flexibilidade para filtros dinâmicos
+   * Código organizado e extensível
+   * Segue padrão DDD
 
-Segue o padrão Specification do Domain-Driven Design
+2. **Tratamento de Erros Centralizado**
 
-### 2. Tratamento de Erros Centralizado
-Implementei um @RestControllerAdvice para:
+   * `@RestControllerAdvice`
+   * Respostas padronizadas
 
-Padronizar todas as respostas de erro
+3. **DTO Pattern**
 
-Separar preocupações (separação do tratamento de erros da lógica de negócio)
+   * Evita expor detalhes de implementação
+   * Flexibilidade na evolução da API
 
-Facilitar manutenção e logging
+4. **H2 em Memória**
 
-### 3. DTO Pattern
-Separei as entidades JPA dos DTOs para:
+   * Atende à especificação "persistência em memória"
+   * Fácil configuração e execução
 
-Controlar quais campos são expostos na API
+---
 
-Evitar expor detalhes de implementação
+## Estrutura do Projeto
 
-Flexibilidade para evolução da API sem impactar o modelo de domínio
-
-### 4. H2 em Memória
-Escolha baseada nos requisitos:
-
-Atende à especificação "persistência em memória"
-
-Fácil configuração e execução
-
-Ideal para desenvolvimento e testes
-
-### Estrutura do Projeto
+```
 .
 ├── src/
 │   ├── main/
 │   │   ├── java/com/techtest/gerenciador_tarefas/
 │   │   │   ├── config/
-│   │   │   │   └── SwaggerConfig.java
 │   │   │   ├── controller/
-│   │   │   │   └── TarefaController.java
 │   │   │   ├── service/
-│   │   │   │   └── TarefaService.java
 │   │   │   ├── repository/
-│   │   │   │   ├── TarefaRepository.java
 │   │   │   │   └── specification/
-│   │   │   │       └── TarefaSpecification.java
 │   │   │   ├── model/
-│   │   │   │   ├── Tarefa.java
-│   │   │   │   ├── StatusTarefa.java
-│   │   │   │   └── PrioridadeTarefa.java
 │   │   │   ├── DTO/
-│   │   │   │   └── TarefaDTO.java
 │   │   │   ├── mapper/
-│   │   │   │   └── TarefaMapper.java
 │   │   │   └── globalExceptionHandler/
-│   │   │       ├── GlobalExceptionHandler.java
-│   │   │       ├── OperacaoInvalidaException.java
-│   │   │       ├── TarefaNaoEncontradaException.java
-│   │   │       └── DTO/
-│   │   │           └── ApiErrorDTO.java
 │   │   └── resources/
 │   │       ├── application.properties
 │   │       └── data.sql (opcional)
 │   └── test/
-│       └── java/com/techtest/gerenciador_tarefas/
-│           └── service/
-│               └── TarefaServiceTest.java
+│       └── java/com/techtest/gerenciador_tarefas/service/
 ├── pom.xml
 └── README.md
+```
 
-### Considerações Finais
--Pontos Fortes da Implementação
--Código limpo e organizado seguindo as melhores práticas do Spring
+---
 
--Documentação completa com Swagger/OpenAPI
+## Considerações Finais
 
--Tratamento robusto de erros com respostas padronizadas
+* Código limpo e organizado
+* Documentação completa com Swagger/OpenAPI
+* Tratamento robusto de erros
+* Filtros dinâmicos flexíveis
+* Separação clara de responsabilidades
 
--Filtros dinâmicos flexíveis usando JPA Specifications
+---
 
--Separação clara de responsabilidades entre camadas
+## Possíveis Melhorias Futuras
 
-### Possíveis Melhorias Futuras
--Autenticação e autorização (Spring Security)
+* Autenticação e autorização (Spring Security)
+* Cache para melhor performance
+* Paginação nos endpoints de listagem
+* Logging mais detalhado
+* Deploy em container (Docker)
 
--Cache para melhor performance
+---
 
--Paginação nos endpoints de listagem
+## Contato
 
--Logging mais detalhado com níveis diferentes
-
--Deploy em container (Docker)
-
-### Contato
-Desenvolvedor: Jonath Oliveira.
-
-LinkedIn: https://www.linkedin.com/in/jonatholiveira/
-
-GitHub: JONATH-OLIVEIRA
+* Desenvolvedor: Jonath Oliveira
+* LinkedIn: [https://www.linkedin.com/in/jonatholiveira/](https://www.linkedin.com/in/jonatholiveira/)
+* GitHub: [JONATH-OLIVEIRA](https://github.com/JONATH-OLIVEIRA)

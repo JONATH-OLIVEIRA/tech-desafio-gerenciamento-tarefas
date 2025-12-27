@@ -4,9 +4,9 @@ API REST para gerenciamento de tarefas desenvolvida como parte do desafio técni
 
 ---
 
-## 📋 Funcionalidades Implementadas
+## Funcionalidades Implementadas
 
-✅ **CRUD Completo de Tarefas**
+ **CRUD Completo de Tarefas**
 
 * `POST /tarefas` - Criar nova tarefa
 * `GET /tarefas` - Listar tarefas com filtros
@@ -15,14 +15,14 @@ API REST para gerenciamento de tarefas desenvolvida como parte do desafio técni
 * `PUT /tarefas/{id}/concluir` - Concluir tarefa
 * `DELETE /tarefas/{id}` - Excluir tarefa
 
-✅ **Filtros Avançados**
+ **Filtros Avançados**
 
 * Status: `PENDENTE`, `EM_ANDAMENTO`, `CONCLUIDA`
 * Prioridade: `BAIXA`, `MEDIA`, `ALTA`
 * Data de criação: Intervalo personalizado
 * Ordenação: Por `dataCriacao` (padrão) ou `prioridade`
 
-✅ **Regras de Negócio**
+**Regras de Negócio**
 
 * Tarefas criadas iniciam automaticamente como `PENDENTE`
 * `dataCriacao` gerada automaticamente no servidor
@@ -33,7 +33,7 @@ API REST para gerenciamento de tarefas desenvolvida como parte do desafio técni
 
 ---
 
-## 🏗️ Arquitetura Técnica
+## Arquitetura Técnica
 
 ```
 src/main/java/com/techtest/gerenciador_tarefas/
@@ -50,7 +50,7 @@ src/main/java/com/techtest/gerenciador_tarefas/
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * Java 17
 * Spring Boot 3.x
@@ -62,7 +62,7 @@ src/main/java/com/techtest/gerenciador_tarefas/
 
 ---
 
-## 🚀 Como Executar o Projeto
+##  Como Executar o Projeto
 
 ### Pré-requisitos
 
@@ -192,9 +192,9 @@ CREATE TABLE tarefas (
 
 ## Testes Unitarios
 ### Cobertura de Testes:
-- **✅ 18 testes implementados** (6 de regras de negócio + 12 de validações)
-- **✅ 100% dos cenários críticos testados**
-- **✅ Todos os testes passando**
+- **18 testes implementados** (6 de regras de negócio + 12 de validações)
+- **100% dos cenários críticos testados**
+- **Todos os testes passando**
 
 ### Categorias de Testes:
 1. **Regras de Negócio** (6 testes):

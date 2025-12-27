@@ -190,7 +190,23 @@ CREATE TABLE tarefas (
 
 ---
 
-## Testes
+## Testes Unitarios
+### Cobertura de Testes:
+- **✅ 18 testes implementados** (6 de regras de negócio + 12 de validações)
+- **✅ 100% dos cenários críticos testados**
+- **✅ Todos os testes passando**
+
+### Categorias de Testes:
+1. **Regras de Negócio** (6 testes):
+   - Criação de tarefas
+   - Início e conclusão de tarefas
+   - Validações de status
+
+2. **Validações de Entrada** (12 testes):
+   - Campos obrigatórios (título, prioridade)
+   - Valores inválidos (vazios, nulos)
+   - IDs inexistentes
+   - Todas prioridades válidas
 
 ```bash
 mvn test

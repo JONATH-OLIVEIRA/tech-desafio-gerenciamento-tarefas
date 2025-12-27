@@ -72,6 +72,10 @@ public class Tarefa implements Serializable {
 	}
 
 	
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
 	public String getTitulo() {
 		return titulo;
 	}

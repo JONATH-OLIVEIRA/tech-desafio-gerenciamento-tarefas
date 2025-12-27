@@ -34,6 +34,9 @@ public class TarefaService {
 		if (dto.getPrioridade() == null) {
 			throw new OperacaoInvalidaException("Prioridade e Obrigatoria");
 		}
+		if (dto.getTitulo() == null || dto.getTitulo().trim().isEmpty()) {
+	        throw new OperacaoInvalidaException("Título é obrigatório");
+	    }
 		Tarefa tarefa = TarefaMapper.toEntity(dto);
 		Tarefa salva = tarefaRepository.save(tarefa);
 		return TarefaMapper.toDTO(salva);

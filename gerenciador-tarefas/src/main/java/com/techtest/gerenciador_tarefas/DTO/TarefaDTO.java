@@ -97,5 +97,4 @@ public class TarefaDTO {
 	public void setDataConclusao(LocalDateTime dataConclusao) {
 		this.dataConclusao = dataConclusao;
 	}
-
 }

@@ -1,5 +1,6 @@
 package com.techtest.gerenciador_tarefas.mapper;
 
+import com.techtest.gerenciador_tarefas.DTO.CriarTarefaDTO;
 import com.techtest.gerenciador_tarefas.DTO.TarefaDTO;
 import com.techtest.gerenciador_tarefas.model.Tarefa;
 
@@ -8,7 +9,7 @@ public class TarefaMapper {
 	private TarefaMapper() {
 	}
 
-	public static Tarefa toEntity(TarefaDTO dto) {
+	public static Tarefa toEntity(CriarTarefaDTO dto) {
 		if (dto == null) {
 			return null;
 		}

@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.UUID;
 
+//import io.swagger.v3.oas.annotations.parameters.RequestBody; 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,17 +15,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.techtest.gerenciador_tarefas.DTO.CriarTarefaDTO;
 import com.techtest.gerenciador_tarefas.DTO.TarefaDTO;
 import com.techtest.gerenciador_tarefas.model.PrioridadeTarefa;
 import com.techtest.gerenciador_tarefas.model.StatusTarefa;
 import com.techtest.gerenciador_tarefas.service.TarefaService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 
 @RestController
@@ -38,7 +40,7 @@ public class TarefaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<TarefaDTO> criarTarefa(@Valid @RequestBody TarefaDTO dto) {
+	public ResponseEntity<TarefaDTO> criarTarefa(@Valid @RequestBody CriarTarefaDTO dto) {
 		TarefaDTO criada = tarefaService.criar(dto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(criada);
 	}
@@ -72,7 +74,7 @@ public class TarefaController {
 				fim = LocalDate.parse(dataFim, DateTimeFormatter.ofPattern("dd/MM/yyyy")).atTime(23, 59, 59);
 			}
 		} catch (DateTimeParseException e) {
-			
+
 			try {
 				if (dataInicio != null && !dataInicio.isEmpty()) {
 					inicio = LocalDate.parse(dataInicio).atStartOfDay();

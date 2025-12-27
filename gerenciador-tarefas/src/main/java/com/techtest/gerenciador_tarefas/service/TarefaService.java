@@ -9,6 +9,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.techtest.gerenciador_tarefas.DTO.CriarTarefaDTO;
 import com.techtest.gerenciador_tarefas.DTO.TarefaDTO;
 import com.techtest.gerenciador_tarefas.globalExceptionHandler.OperacaoInvalidaException;
 import com.techtest.gerenciador_tarefas.globalExceptionHandler.TarefaNaoEncontradaException;
@@ -29,7 +30,7 @@ public class TarefaService {
 		this.tarefaRepository = repository;
 	}
 
-	public TarefaDTO criar(TarefaDTO dto) {
+	public TarefaDTO criar(CriarTarefaDTO dto) {
 		if (dto.getPrioridade() == null) {
 			throw new OperacaoInvalidaException("Prioridade e Obrigatoria");
 		}

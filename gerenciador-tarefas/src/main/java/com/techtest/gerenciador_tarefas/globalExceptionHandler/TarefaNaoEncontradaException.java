@@ -9,6 +9,10 @@ public class TarefaNaoEncontradaException extends RuntimeException {
 		super("Tarefa com ID " + id + " não encontrada.");
 	}
 
+	public TarefaNaoEncontradaException(String mensagem, UUID id) {
+		super(mensagem + " (ID: " + id + ")");
+	}
+
 	public TarefaNaoEncontradaException(String message) {
 		super(message);
 	}

@@ -43,21 +43,25 @@ public class TarefaService {
 	}
 
 	public TarefaDTO iniciarTarefa(UUID id) {
-		Tarefa tarefa = buscarEntidadePorId(id);
+	    Tarefa tarefa = buscarEntidadePorId(id);
 
-		if (tarefa.getStatus() != StatusTarefa.PENDENTE) {
-			throw new OperacaoInvalidaException(id);
-		}
-		tarefa.setStatus(StatusTarefa.EM_ANDAMENTO);
-
-		return TarefaMapper.toDTO(tarefa);
+	    if (tarefa.getStatus() == StatusTarefa.CONCLUIDA) {
+	        throw new OperacaoInvalidaException("Tarefa já finalizada para o ID: " + id);
+	    }
+	    
+	    if (tarefa.getStatus() == StatusTarefa.EM_ANDAMENTO) {
+	        throw new OperacaoInvalidaException("Tarefa já iniciada para o ID: " + id);
+	    }	    
+	    
+	    tarefa.setStatus(StatusTarefa.EM_ANDAMENTO);
+	    return TarefaMapper.toDTO(tarefa);
 	}
 
 	public TarefaDTO concluirTarefa(UUID id) {
 		Tarefa tarefa = buscarEntidadePorId(id);
 
 		if (tarefa.getStatus() == StatusTarefa.CONCLUIDA) {
-			throw new OperacaoInvalidaException(id);
+			throw new OperacaoInvalidaException("Tarefa já concluida para o Id : " + id);
 		}
 
 		tarefa.setStatus(StatusTarefa.CONCLUIDA);
@@ -80,7 +84,7 @@ public class TarefaService {
 	public List<TarefaDTO> listar(StatusTarefa status, PrioridadeTarefa prioridade, LocalDateTime dataInicio,
 			LocalDateTime dataFim, String ordenarPor) {
 
-		// SOLUÇÃO: Inicialize corretamente ou use construção incremental
+		
 		Specification<Tarefa> spec = null;
 
 		if (status != null) {
@@ -97,9 +101,9 @@ public class TarefaService {
 					: spec.and(TarefaSpecification.dataCriacaoEntre(dataInicio, dataFim));
 		}
 
-		// Se nenhum filtro foi aplicado, busca tudo
+	
 		if (spec == null) {
-			spec = (root, query, cb) -> cb.conjunction(); // WHERE 1=1
+			spec = (root, query, cb) -> cb.conjunction(); 
 		}
 
 		Sort sort = Sort.by("dataCriacao");

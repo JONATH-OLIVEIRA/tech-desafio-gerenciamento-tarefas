@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -84,4 +85,20 @@ public class GlobalExceptionHandler {
 
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
 	}
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public ResponseEntity<ApiErrorDTO> handleHttpMessageNotReadable(
+	        HttpMessageNotReadableException ex,
+	        HttpServletRequest request) {
+
+	    ApiErrorDTO error = new ApiErrorDTO(
+	            HttpStatus.BAD_REQUEST.value(),
+	            "Erro de requisição",
+	            "Valor inválido para um dos campos. Verifique os enums permitidos (ex: BAIXA, MEDIA, ALTA).",
+	            request.getRequestURI(),
+	            LocalDateTime.now()
+	    );
+
+	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+
 }
